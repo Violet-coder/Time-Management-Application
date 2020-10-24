@@ -1,0 +1,12 @@
+{
+    "dev": {
+        "app_function": "app.app",
+        "aws_region": "us-east-1",
+        "profile_name": "default",
+        "project_name": "ece1779-a3",
+        "runtime": "python3.7",
+        "s3_bucket": "users12",
+        "keep_warm":false,
+        "manage_roles":true
+    }
+}

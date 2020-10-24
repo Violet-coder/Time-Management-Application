@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Pomodoro</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="https://users12.s3.amazonaws.com/static/bootstrap/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="https://users12.s3.amazonaws.com/static/bootstrap/util.css">
+	<link rel="stylesheet" type="text/css" href="https://users12.s3.amazonaws.com/static/bootstrap/main.css">
+
+</head>
+<body style="background-color: #666666;">
+
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<form class="login100-form validate-form" method="post">
+					<span class="login100-form-title p-b-43">
+						{{ username }} Pomodoro
+					</span>
+                    <div class="text-center p-t-20 p-b-20">
+                        <h5>🍅 tomato timer ends in <span id="time">00:00</span> minutes!</h5>
+                    </div>
+                    <div class="text-center p-t-20 p-b-20">
+                        {% for message in get_flashed_messages() %}
+                        <h5 style="color: cornflowerblue">{{message}}</h5>
+                        {% endfor%}
+					</div>
+
+
+
+                    <div class="wrap-input100 validate-input" data-validate = "Username is required">
+
+                        <input class="input100" type="text" name="work_min" method="post">
+						<span class="focus-input100"></span>
+						<span class="label-input100">WORK MINUTES</span>
+
+                    </div>
+
+                        <div class="container-login100-form-btn">
+
+
+                        <button class="login100-form-btn" onclick="getElementById('demo').innerHTML='<br><h4>🍅 tomato clock starts.</h4>'">Submit</button>
+                        </div>
+                <br>
+                <div>
+
+                    <p>Click the buttons to play or pause the audio.</p >
+                    <img id="rain" src="https://users12.s3.amazonaws.com/static/bootstrap/rain.jpg" height="150" width="270" alt="Play Button">
+                    <audio id="rain" src="https://users12.s3.amazonaws.com/static/music/Rain-on-concrete.mp3" type="audio/mp3" controls>Your browser does not support the audio element.</audio>
+                    <br>
+                    <img id="forest" src="https://users12.s3.amazonaws.com/static/bootstrap/forest.png" height="150" width="270" alt="Play Button">
+                    <audio id="forest" src="https://users12.s3.amazonaws.com/static/music/Forest-ambience.mp3" type="audio/mp3" controls>Your browser does not support the audio element.</audio>
+                    <br>
+                    <img id="water" src="https://users12.s3.amazonaws.com/static/bootstrap/water.jpg" height="150" width="270" alt="Play Button">
+                    <audio id="water" src="https://users12.s3.amazonaws.com/static/music/Sound-effect-of-walking-through-water.mp3" type="audio/mp3" controls>Your browser does not support the audio element.</audio>
+
+                </div>
+                    <a class="buttons" href="{{ url_for('user_visit',username=username) }}">Back</a>
+
+
+
+
+                        <p id="demo"></p>
+
+
+
+                        <script>
+                            var timeInMinutes={{ work_min }};
+                            // Set the date we're counting down to
+                            function startTimer(duration, display) {
+                                var timer = duration, minutes, seconds;
+                                var x = setInterval(function () {
+                                    minutes = parseInt(timer / 60, 10);
+                                    seconds = parseInt(timer % 60, 10);
+
+                                    minutes = minutes < 10 ? "0" + minutes : minutes;
+                                    seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                                    display.textContent = minutes + ":" + seconds;
+
+                                    if (--timer < 0) {
+                                        clearInterval(x);
+                                        document.getElementById("demo").innerHTML = "EXPIRED";
+                                    }
+                                    }, 1000);
+                            }
+
+                            window.onload = function () {
+                                var totalMinutes = 60 * timeInMinutes,
+                                    display = document.querySelector('#time');
+                                startTimer(totalMinutes, display);
+                            };
+                        </script>
+
+                </form>
+            <div class="login100-more" style="background-image: url('https://users12.s3.amazonaws.com/static/bootstrap/bg-01.jpg');">
+
+            </div>
+			</div>
+		</div>
+	</div>
+
+	<script href="https://users12.s3.amazonaws.com/static/bootstrap/jquery.min.js"></script>
+	<script href="https://users12.s3.amazonaws.com/static/bootstrap/bootstrap.min.js"></script>
+	<script href="https://users12.s3.amazonaws.com/static/bootstrap/main.js"></script>
+
+</body>
+</html>
